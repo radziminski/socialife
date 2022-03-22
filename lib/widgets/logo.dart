@@ -11,7 +11,7 @@ class Logo extends StatelessWidget {
     return SizedBox(
       width: size,
       height: size,
-      child: Image.asset(kLogo05xAsset),
+      child: Image.asset(kLogo1xAsset),
     );
   }
 }

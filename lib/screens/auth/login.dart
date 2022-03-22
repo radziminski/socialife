@@ -23,21 +23,24 @@ class _LoginScreenState extends State<LoginScreen> {
       unfocusOnTap: true,
       child: Center(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Align(
+              Align(
                 alignment: Alignment.centerLeft,
                 child: Hero(
                   tag: 'logo',
-                  child: SizedBox(
-                    child: Logo(size: 60),
+                  child: Transform.translate(
+                    offset: const Offset(-10, 0),
+                    child: const SizedBox(
+                      child: Logo(size: 60),
+                    ),
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
               FadeInAnimation(
                 delay: const Duration(milliseconds: 50),
                 duration: const Duration(milliseconds: 200),
@@ -71,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),

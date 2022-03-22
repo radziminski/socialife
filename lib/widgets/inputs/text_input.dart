@@ -24,14 +24,14 @@ class TextInput extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 width: 1,
-                color: kGray60Color,
+                color: kGray40Color,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
             focusedBorder: OutlineInputBorder(
               borderSide: const BorderSide(
                 width: 1,
-                color: kWhiteColor,
+                color: kGray60Color,
               ),
               borderRadius: BorderRadius.circular(6),
             ),
