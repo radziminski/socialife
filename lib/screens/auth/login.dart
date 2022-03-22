@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:socialife/screens/home.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -16,6 +17,15 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController controller = TextEditingController();
+
+  Future handleNavigate(BuildContext context) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const HomeScreen(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     ButtonPrimary(
                       label: 'Continue',
-                      onPressed: () {},
+                      onPressed: () => handleNavigate(context),
                     ),
                   ],
                 ),

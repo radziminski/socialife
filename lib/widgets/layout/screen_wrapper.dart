@@ -18,7 +18,10 @@ class ScreenWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget body = Scaffold(
       body: SafeArea(
-        child: child ?? Container(),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 20.0),
+          child: child ?? Container(),
+        ),
       ),
     );
 
