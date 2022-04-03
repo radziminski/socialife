@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class ScreenPadding extends StatelessWidget {
-  const ScreenPadding({
+class PagePadding extends StatelessWidget {
+  const PagePadding({
     Key? key,
     this.child,
   }) : super(key: key);

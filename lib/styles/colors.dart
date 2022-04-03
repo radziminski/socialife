@@ -12,3 +12,5 @@ const kGray30Color = Color(0xFF5F6B6D);
 const kGray40Color = Color(0xFF7E8F91);
 const kGray50Color = Color(0xFF9EB3B5);
 const kGray60Color = Color(0xFFBBCACB);
+// const kBackgroundColor = Color(0xFF051515);
+const kBackgroundColor = kGray10Color;

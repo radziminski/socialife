@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:socialife/styles/colors.dart';
 
-class ScreenWrapper extends StatelessWidget {
-  const ScreenWrapper({
+class PageWrapper extends StatelessWidget {
+  const PageWrapper({
     Key? key,
     this.child,
     this.preventPop = false,
     this.unfocusOnTap = false,
     this.onWillPop,
+    this.topPadding = 20,
   }) : super(key: key);
 
   final Widget? child;
   final bool preventPop;
   final bool unfocusOnTap;
   final Future<bool> Function()? onWillPop;
+  final double topPadding;
 
   @override
   Widget build(BuildContext context) {
     Widget body = Scaffold(
+      backgroundColor: kBackgroundColor,
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20.0),
+          padding: EdgeInsets.only(top: topPadding),
           child: child ?? Container(),
         ),
       ),

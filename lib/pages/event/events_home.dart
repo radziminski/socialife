@@ -1,19 +1,20 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:socialife/constants/assets.dart';
-import 'package:socialife/screens/event.dart';
+import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/widgets/layout/screen_padding.dart';
 import 'package:socialife/widgets/layout/screen_wrapper.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+class EventsHomePage extends StatelessWidget {
+  const EventsHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
+    return PageWrapper(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const ScreenPadding(
+          const PagePadding(
             child: Text(
               'Events',
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.w500),
@@ -29,16 +30,14 @@ class HomeScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const EventScreen()));
+                    AutoRouter.of(context).push(
+                      EventRoute(eventId: 1),
+                    );
                   },
                   child: Hero(
                     tag: 'asset1',
                     child: SizedBox(
                       height: 200,
-                      width: 150,
                       child: Image.asset(kEventMock1),
                     ),
                   ),

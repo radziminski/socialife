@@ -1,5 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:socialife/screens/home.dart';
+import 'package:socialife/pages/home.dart';
+import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -8,28 +10,25 @@ import 'package:socialife/widgets/layout/column_with_spacing.dart';
 import 'package:socialife/widgets/layout/screen_wrapper.dart';
 import 'package:socialife/widgets/logo.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginPageState extends State<LoginPage> {
   TextEditingController controller = TextEditingController();
 
   Future handleNavigate(BuildContext context) {
-    return Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const HomeScreen(),
-      ),
+    return AutoRouter.of(context).push(
+      const EventsHomeRoute(),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return ScreenWrapper(
+    return PageWrapper(
       unfocusOnTap: true,
       child: Center(
         child: Padding(
