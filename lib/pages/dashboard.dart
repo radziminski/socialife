@@ -4,12 +4,13 @@ import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/layout/navigation/bottom_navbar.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class DashboardPage extends StatelessWidget {
+  const DashboardPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AutoTabsScaffold(
+      navigatorObservers: () => [HeroController()],
       backgroundColor: kGray10Color,
       routes: const [
         EventsRouter(),

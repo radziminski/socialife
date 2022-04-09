@@ -1,19 +1,21 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:socialife/pages/account/account.dart';
-import 'package:socialife/pages/event/event.dart';
-import 'package:socialife/pages/event/events.dart';
-import 'package:socialife/pages/event/events_home.dart';
-import 'package:socialife/pages/home.dart';
+import 'package:socialife/pages/auth/login.dart';
+import 'package:socialife/pages/events/event.dart';
+import 'package:socialife/pages/events/events.dart';
+import 'package:socialife/pages/events/events_home.dart';
+import 'package:socialife/pages/dashboard.dart';
 import 'package:socialife/pages/search/search.dart';
-import 'package:socialife/pages/ticket/ticket.dart';
-import 'package:socialife/pages/ticket/tickets.dart';
+import 'package:socialife/pages/splash.dart';
+import 'package:socialife/pages/tickets/ticket.dart';
+import 'package:socialife/pages/tickets/tickets.dart';
 
 @CupertinoAutoRouter(
   replaceInRouteName: 'Page,Route',
   routes: [
     AutoRoute(
-      path: '/',
-      page: HomePage,
+      path: 'dashboard',
+      page: DashboardPage,
       children: [
         AutoRoute(
           path: 'events',
@@ -60,6 +62,15 @@ import 'package:socialife/pages/ticket/tickets.dart';
           page: AccountPage,
         ),
       ],
+    ),
+    AutoRoute(
+      path: 'login',
+      page: LoginPage,
+    ),
+    AutoRoute(
+      path: 'splash',
+      page: SplashPage,
+      initial: true,
     ),
   ],
 )

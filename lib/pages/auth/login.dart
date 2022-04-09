@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:socialife/pages/home.dart';
 import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
@@ -21,9 +20,7 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController controller = TextEditingController();
 
   Future handleNavigate(BuildContext context) {
-    return AutoRouter.of(context).push(
-      const EventsHomeRoute(),
-    );
+    return AutoRouter.of(context).push(const DashboardRoute());
   }
 
   @override

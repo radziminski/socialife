@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socialife/pages/splash.dart';
+import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/themes.dart';
 
 void main() {
@@ -9,12 +9,16 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
 
+  final _appRouter = AppRouter();
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      debugShowCheckedModeBanner: false,
+      routerDelegate: _appRouter.delegate(),
+      routeInformationParser: _appRouter.defaultRouteParser(),
       title: 'Socialife',
       theme: kDarkTheme,
-      home: const SplashPage(),
     );
   }
 }
