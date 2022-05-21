@@ -6,7 +6,7 @@ import 'package:socialife/widgets/animations/fade_in.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
 import 'package:socialife/widgets/inputs/text_input.dart';
 import 'package:socialife/widgets/layout/column_with_spacing.dart';
-import 'package:socialife/widgets/layout/screen_wrapper.dart';
+import 'package:socialife/widgets/layout/page_wrapper.dart';
 import 'package:socialife/widgets/logo.dart';
 
 class LoginPage extends StatefulWidget {

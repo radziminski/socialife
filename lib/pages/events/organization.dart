@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:socialife/widgets/layout/page_wrapper.dart';
 
-class SearchPage extends StatelessWidget {
-  const SearchPage({Key? key}) : super(key: key);
+class OrganizationPage extends StatelessWidget {
+  const OrganizationPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return const PageWrapper(
       child: Center(
         child: Text(
-          'SearchPage - page with input and events list - TODO',
+          'OrganizationPage - page with events from org - TODO',
         ),
       ),
     );

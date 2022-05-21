@@ -4,7 +4,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:socialife/constants/debug.dart';
 import 'package:socialife/routes/router.gr.dart';
-import 'package:socialife/widgets/layout/screen_wrapper.dart';
+import 'package:socialife/widgets/layout/page_wrapper.dart';
 import 'package:socialife/widgets/logo.dart';
 
 class SplashPage extends StatelessWidget {

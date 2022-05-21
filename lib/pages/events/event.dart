@@ -1,7 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:socialife/constants/assets.dart';
-import 'package:socialife/widgets/layout/screen_wrapper.dart';
+import 'package:socialife/widgets/layout/page_wrapper.dart';
 
 class EventPage extends StatelessWidget {
   const EventPage({
@@ -24,10 +24,7 @@ class EventPage extends StatelessWidget {
                 AutoRouter.of(context).pop();
               }
             },
-            child: Hero(
-              tag: 'asset1',
-              child: Image.asset(kEventMock1),
-            ),
+            child: Hero(tag: 'event $eventId', child: Image.asset(kEventMock1)),
           ),
         ],
       ),
