@@ -1,7 +1,10 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:socialife/constants/assets.dart';
 import 'package:socialife/routes/router.gr.dart';
+import 'package:socialife/widgets/api_test.dart';
 import 'package:socialife/widgets/layout/page_padding.dart';
 import 'package:socialife/widgets/layout/page_wrapper.dart';
 
@@ -20,6 +23,7 @@ class EventsHomePage extends StatelessWidget {
               style: TextStyle(fontSize: 36, fontWeight: FontWeight.w500),
             ),
           ),
+          ApiTest(),
           SizedBox(
             height: 20,
           ),

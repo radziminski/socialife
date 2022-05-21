@@ -1,6 +1,10 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:socialife/locator.dart';
 import 'package:socialife/routes/router.gr.dart';
+import 'package:socialife/services/auth/api/login.request.dart';
+import 'package:socialife/services/auth/auth.dart';
+import 'package:socialife/services/auth/dto/login.dto.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -17,10 +21,26 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController controller = TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  Future handleNavigate(BuildContext context) {
+  Future onSubmit(BuildContext context) async {
+    final response = await login(
+      LoginDto(
+        email: emailController.value.text,
+        password: passwordController.value.text,
+      ),
+    );
+    await locator<AuthService>().setAccessToken(response.accessToken);
     return AutoRouter.of(context).push(const DashboardRoute());
+  }
+
+  @override
+  void initState() {
+    if (locator<AuthService>().isAuthenticated) {
+      AutoRouter.of(context).push(const DashboardRoute());
+    }
+    super.initState();
   }
 
   @override
@@ -72,11 +92,14 @@ class _LoginPageState extends State<LoginPage> {
                       ],
                     ),
                     TextInput(
-                      controller: controller,
+                      controller: emailController,
+                    ),
+                    TextInput(
+                      controller: passwordController,
                     ),
                     ButtonPrimary(
                       label: 'Continue',
-                      onPressed: () => handleNavigate(context),
+                      onPressed: () => onSubmit(context),
                     ),
                   ],
                 ),
