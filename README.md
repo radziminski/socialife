@@ -1,6 +1,6 @@
-# socialife
+# Socialife
 
-A new Flutter project.
+Application for browsing and buying tickets for various events.
 
 ## Getting Started
 
