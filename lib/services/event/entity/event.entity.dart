@@ -35,6 +35,7 @@ class Event extends BaseEntity {
   late OrganizationProfile? createdBy;
   late List<TicketType> ticketTypes;
   late List<EventLike> likes;
+  late List<String>? externalImageUrls;
 
   Event(Json json, {this.isFull = false}) : super(json) {
     title = json['title'];
@@ -50,6 +51,8 @@ class Event extends BaseEntity {
         ? getEventCategoryFromString(json['category'])
         : EventCategory.other;
     likesNumber = json['likesNumber'];
+    externalImageUrls =
+        parseList(json['externalImageUrls'], (json) => json.toString());
     ticketTypes = [];
     likes = [];
 

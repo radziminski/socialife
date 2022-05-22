@@ -12,6 +12,7 @@ class CreateEventDto extends BaseDto {
   String? longitude;
   String? latitude;
   EventCategory? category;
+  List<String>? externalImageUrls;
 
   CreateEventDto({
     required this.title,
@@ -37,6 +38,7 @@ class CreateEventDto extends BaseDto {
       'longitude': longitude,
       'latitude': latitude,
       'category': category != null ? getEventCategoryString(category!) : null,
+      'externalImageUrls': externalImageUrls ?? [],
     };
   }
 }
