@@ -24,6 +24,13 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController passwordController = TextEditingController();
 
   Future onSubmit(BuildContext context) async {
+    print(TokensService.isAuthenticated);
+    print(TokensService.accessToken);
+    if (TokensService.isAuthenticated) {
+      AutoRouter.of(context).push(const DashboardRoute());
+      return;
+    }
+
     final response = await login(
       LoginDto(
         email: emailController.value.text,

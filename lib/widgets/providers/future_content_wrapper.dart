@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:socialife/services/exception/exceptions.dart';
 
-class FutureContentWrapper<Error extends ExceptionBase>
+class FutureContentWrapper<Error extends BaseException>
     extends StatelessWidget {
   final bool isLoading;
   final bool isError;

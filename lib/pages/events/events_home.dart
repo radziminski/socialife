@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:socialife/constants/assets.dart';
 import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/widgets/api_test.dart';
+import 'package:socialife/widgets/event/event_card.dart';
 import 'package:socialife/widgets/layout/page_padding.dart';
 import 'package:socialife/widgets/layout/page_wrapper.dart';
+import 'package:socialife/widgets/providers/event_provider.dart';
 
 class EventsHomePage extends StatelessWidget {
   const EventsHomePage({Key? key}) : super(key: key);
@@ -73,6 +75,20 @@ class EventsHomePage extends StatelessWidget {
                   child: Image.asset(kEventMock3),
                 ),
               ],
+            ),
+          ),
+          SizedBox(
+            height: 200,
+            child: EventProvider(
+              key: const Key('EventsHomePage-EventsList'),
+              isListProvider: true,
+              builder: (context, model, _) => ListView(
+                scrollDirection: Axis.horizontal,
+                children: model.itemsList
+                        ?.map((event) => EventCard(event: event))
+                        .toList() ??
+                    [],
+              ),
             ),
           )
         ],

@@ -1,8 +1,9 @@
+import 'package:flutter/foundation.dart';
 import 'package:socialife/locator.dart';
 import 'package:socialife/services/secure-storage/secure_storage.dart';
 
 class TokensServiceSingleton {
-  static const _accessTokenKey = 'access_token';
+  static const _accessTokenKey = 'socialife_access_token';
   final _secureStorageService = SecureStorageService;
   String? accessToken;
   bool isAuthenticated = false;
@@ -21,7 +22,11 @@ class TokensServiceSingleton {
     try {
       final readAccessToken = await _secureStorageService.read(_accessTokenKey);
       return readAccessToken;
-    } catch (_) {
+    } catch (error) {
+      if (kDebugMode) {
+        print('Error while reading access token');
+        rethrow;
+      }
       return null;
     }
   }

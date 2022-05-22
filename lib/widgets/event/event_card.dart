@@ -1,40 +1,40 @@
+import 'dart:math';
+
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:socialife/constants/assets.dart';
 import 'package:socialife/routes/router.gr.dart';
+import 'package:socialife/services/event/entity/event.entity.dart';
 
 class EventCard extends StatelessWidget {
+  final Event event;
+
   const EventCard({
     Key? key,
-    required this.backgroundImage,
-    required this.id,
+    required this.event,
   }) : super(key: key);
-
-  final Image backgroundImage;
-  final int id;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AutoRouter.of(context).push(EventRoute(eventId: id)),
-      child: Container(
-        height: 400,
-        width: MediaQuery.of(context).size.width,
-        margin: const EdgeInsets.only(left: 0, right: 14),
-        decoration: BoxDecoration(
-          color: Colors.amber,
-          borderRadius: BorderRadius.circular(24),
-        ),
-        child: Stack(children: [
-          SizedBox(
-            height: 300,
-            width: MediaQuery.of(context).size.width,
-            child: Hero(
-              tag: 'event $id',
-              child: backgroundImage,
-            ),
+      onTap: () => AutoRouter.of(context).push(EventRoute(eventId: event.id)),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Container(
+          height: 250,
+          width: 140,
+          decoration: BoxDecoration(
+            color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
+                .withOpacity(1.0),
+            borderRadius: BorderRadius.circular(24),
           ),
-        ]),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(event.title),
+            ],
+          ),
+        ),
       ),
     );
   }

@@ -4,6 +4,7 @@ import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/themes.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   setupLocator();
   runApp(MyApp());
 }

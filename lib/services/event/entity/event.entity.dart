@@ -31,7 +31,7 @@ class Event extends BaseEntity {
   late bool isCanceled;
   late EventCategory category;
   bool isFull;
-  late int likesNumber;
+  late int? likesNumber;
   late OrganizationProfile? createdBy;
   late List<TicketType> ticketTypes;
   late List<EventLike> likes;
@@ -46,7 +46,9 @@ class Event extends BaseEntity {
     longitude = json['longitude'];
     latitude = json['latitude'];
     isCanceled = json['isCanceled'] ?? false;
-    category = getEventCategoryFromString(json['role']);
+    category = json['category'] != null
+        ? getEventCategoryFromString(json['category'])
+        : EventCategory.other;
     likesNumber = json['likesNumber'];
     ticketTypes = [];
     likes = [];
