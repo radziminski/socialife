@@ -3,7 +3,7 @@ import 'package:dio_smart_retry/dio_smart_retry.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:socialife/constants/config.dart';
 import 'package:socialife/locator.dart';
-import 'package:socialife/services/auth/auth.dart';
+import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/types.dart';
 
 enum RequestMethod {
@@ -13,18 +13,28 @@ enum RequestMethod {
   delete,
 }
 
-/// Singleton
-class RequestService {
+class RequestServiceSingleton {
   static const skipAuthHeader = 'x-skip-auth';
   static const removeNullsHeader = 'x-remove-nulls';
   final Dio client = Dio();
 
-  RequestService() {
+  RequestServiceSingleton() {
     _setupInterceptors();
+    client.options.baseUrl = kApiBaseUrl;
   }
 
   void _setupInterceptors() {
-    client.interceptors.add(PrettyDioLogger());
+    client.interceptors.add(
+      InterceptorsWrapper(
+        onRequest: _authInterceptor,
+      ),
+    );
+    client.interceptors.add(PrettyDioLogger(
+      requestBody: true,
+      responseBody: true,
+      requestHeader: true,
+      request: true,
+    ));
     client.interceptors.add(RetryInterceptor(
       dio: client,
       retries: 3,
@@ -34,18 +44,13 @@ class RequestService {
         Duration(seconds: 2),
       ],
     ));
-    client.interceptors.add(
-      InterceptorsWrapper(
-        onRequest: _authInterceptor,
-      ),
-    );
   }
 
   void _authInterceptor(
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    String? token = locator<AuthService>().accessToken;
+    String? token = TokensService.accessToken;
     if (token == null) {
       return handler.next(options);
     }
@@ -56,7 +61,7 @@ class RequestService {
       return handler.next(options);
     }
 
-    if (options.headers[removeNullsHeader]) {
+    if (options.headers[removeNullsHeader] != null) {
       options.headers.remove(removeNullsHeader);
       options.data = removeNullsFromPayload(options.data);
     }
@@ -74,12 +79,8 @@ class RequestService {
     bool removeNulls = true,
   }) async {
     try {
-      final RequestOptions options = RequestOptions(
+      final Options options = Options(
         method: geRequestMethodString(method),
-        path: route,
-        baseUrl: kApiBaseUrl,
-        data: payload,
-        contentType: Headers.jsonContentType,
         headers: {
           // ignore: unnecessary_string_interpolations
           '$skipAuthHeader': skipAuth,
@@ -88,7 +89,11 @@ class RequestService {
         },
       );
 
-      final Response<Result> response = await client.fetch<Result>(options);
+      final Response<Result> response = await client.request<Result>(
+        route,
+        data: payload,
+        options: options,
+      );
 
       if (response.data == null) {
         throw Exception('Received null data');
@@ -96,7 +101,7 @@ class RequestService {
 
       return response.data!;
     } catch (e) {
-      throw Exception();
+      rethrow;
     }
   }
 
@@ -126,4 +131,4 @@ class RequestService {
   }
 }
 
-final request = locator<RequestService>().request;
+final request = locator<RequestServiceSingleton>().request;

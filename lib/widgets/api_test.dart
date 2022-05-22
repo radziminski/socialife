@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:socialife/services/auth/api/get_me.dart';
+import 'package:socialife/services/user/api/get_me.request.dart';
 
 class ApiTest extends StatefulWidget {
   const ApiTest({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _ApiTestState extends State<ApiTest> {
     getMe().then((user) {
       setState(() {
         email = user.email;
-        firstName = user.profile.firstName;
+        firstName = user.profile?.firstName ?? 'unknown';
       });
     });
   }

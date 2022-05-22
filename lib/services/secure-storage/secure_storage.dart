@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:socialife/locator.dart';
 
-/// Singleton
-class SecureStorageService {
+class SecureStorageServiceSingleton {
   final _storage = const FlutterSecureStorage();
 
   Future save(String key, String value) {
@@ -20,3 +20,6 @@ class SecureStorageService {
     return _storage.deleteAll();
   }
 }
+
+// ignore: non_constant_identifier_names
+final SecureStorageService = locator<SecureStorageServiceSingleton>();

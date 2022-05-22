@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:socialife/locator.dart';
 import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/styles/themes.dart';
 
 void main() {
+  setupLocator();
   runApp(MyApp());
 }
 
