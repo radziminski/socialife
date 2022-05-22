@@ -1,8 +1,10 @@
 import 'package:dio/dio.dart';
 import 'package:dio_smart_retry/dio_smart_retry.dart';
+import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:socialife/constants/config.dart';
 import 'package:socialife/locator.dart';
+import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/types.dart';
 
@@ -50,7 +52,7 @@ class RequestServiceSingleton {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) {
-    String? token = TokensService.accessToken;
+    String? token = TokensService.getAccessToken();
     if (token == null) {
       return handler.next(options);
     }
@@ -100,8 +102,30 @@ class RequestServiceSingleton {
       }
 
       return response.data!;
-    } catch (e) {
-      rethrow;
+    } catch (error) {
+      if (error is DioError) {
+        if (error.response?.statusCode != null) {
+          if (error.response!.statusCode == 401) {
+            throw UnauthorizedException();
+          }
+          if (error.response!.statusCode == 403) {
+            throw ForbiddenException();
+          }
+          if (error.response!.statusCode! > 500) {
+            throw UnavailableException();
+          }
+          if (error.response!.statusCode == 500) {
+            throw UnknownRequestException();
+          }
+        }
+
+        throw DisconnectedException();
+      } else {
+        if (kDebugMode) {
+          rethrow;
+        }
+        throw UnknownException();
+      }
     }
   }
 

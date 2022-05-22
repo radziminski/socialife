@@ -3,12 +3,12 @@
 import 'package:flutter/material.dart';
 
 class BaseException implements Exception {
-  int code;
-  String title;
-  String? description;
-  IconData? icon;
+  final int code;
+  final String title;
+  final String? description;
+  final IconData? icon;
 
-  BaseException({
+  const BaseException({
     required this.code,
     required this.title,
     this.description,
@@ -16,7 +16,16 @@ class BaseException implements Exception {
   });
 }
 
-class UnauthorizedException extends BaseException {
+class RequestException extends BaseException {
+  RequestException({
+    required int code,
+    required String title,
+    String? description,
+    IconData? icon,
+  }) : super(code: code, title: title, description: description, icon: icon);
+}
+
+class UnauthorizedException extends RequestException {
   UnauthorizedException({String? description})
       : super(
           code: 401,
@@ -25,11 +34,66 @@ class UnauthorizedException extends BaseException {
         );
 }
 
+class InvalidCredentialsException extends RequestException {
+  InvalidCredentialsException({String? description})
+      : super(
+          code: 401,
+          title: 'Invalid email or password',
+        );
+}
+
+class ForbiddenException extends RequestException {
+  ForbiddenException({String? description})
+      : super(
+          code: 401,
+          title: 'You are not authorized to view this content',
+          description: description,
+        );
+}
+
+class UnavailableException extends RequestException {
+  UnavailableException({String? description})
+      : super(
+          code: 500,
+          title:
+              'Our servers are temporarily unavailable, please try again later',
+          description: description,
+        );
+}
+
 class UnknownException extends BaseException {
-  UnknownException({String? title, String? description})
+  const UnknownException({String? title, String? description})
       : super(
           code: 1,
-          title: title ?? 'Unknown error',
+          title: title ?? 'Something went wrong',
           description: description,
+        );
+}
+
+class UnknownRequestException extends RequestException {
+  UnknownRequestException({String? title, String? description})
+      : super(
+          code: 1,
+          title: title ?? 'Something went wrong with the request',
+          description: description,
+        );
+}
+
+class DisconnectedException extends RequestException {
+  DisconnectedException({String? description})
+      : super(
+          code: 2,
+          title: 'No internet connection',
+          description:
+              'Make sure you are connected to the internet and try again',
+        );
+}
+
+class AppInitException extends BaseException {
+  AppInitException()
+      : super(
+          code: 3,
+          title: 'Something went wrong with initializing the app',
+          description: 'Make sure you have internet connection and try again',
         );
 }

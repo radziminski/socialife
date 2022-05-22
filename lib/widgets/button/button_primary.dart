@@ -2,14 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:socialife/styles/colors.dart';
 
 class ButtonPrimary extends StatelessWidget {
+  final String label;
+  final void Function() onPressed;
+  final bool isLoading;
+  final IconData? icon;
+
   const ButtonPrimary({
     Key? key,
     required this.label,
     required this.onPressed,
+    this.isLoading = false,
+    this.icon,
   }) : super(key: key);
-
-  final String label;
-  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -25,13 +29,42 @@ class ButtonPrimary extends StatelessWidget {
             overlayColor: MaterialStateProperty.all(kPrimaryDarkColor),
           ),
           onPressed: onPressed,
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: kBlackColor,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
+          child: isLoading
+              ? Center(
+                  child: Transform.scale(
+                    scale: 0.45,
+                    child: CircularProgressIndicator(
+                      strokeWidth: 5,
+                      backgroundColor: Colors.white.withOpacity(0.7),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        kPrimaryDarkColor,
+                      ),
+                    ),
+                  ),
+                )
+              : Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    if (icon != null)
+                      Icon(
+                        icon,
+                        color: kBlackColor,
+                        size: 16,
+                      ),
+                    if (icon != null)
+                      const SizedBox(
+                        width: 8,
+                      ),
+                    Text(
+                      label,
+                      style: const TextStyle(
+                        color: kBlackColor,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
         ),
       ),
     );

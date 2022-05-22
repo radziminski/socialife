@@ -8,9 +8,7 @@ class TokensServiceSingleton {
   String? accessToken;
   bool isAuthenticated = false;
 
-  TokensServiceSingleton() {
-    _readAndProcessAccessToken();
-  }
+  String? getAccessToken() => accessToken;
 
   Future setAccessToken(String newAccessToken) async {
     await _secureStorageService.save(_accessTokenKey, newAccessToken);
@@ -18,9 +16,16 @@ class TokensServiceSingleton {
     isAuthenticated = true;
   }
 
+  Future clearAccessToken() async {
+    await _secureStorageService.delete(_accessTokenKey);
+    isAuthenticated = false;
+    accessToken = null;
+  }
+
   Future<String?> _getAccessToken() async {
     try {
       final readAccessToken = await _secureStorageService.read(_accessTokenKey);
+      accessToken = readAccessToken;
       return readAccessToken;
     } catch (error) {
       if (kDebugMode) {
@@ -31,7 +36,7 @@ class TokensServiceSingleton {
     }
   }
 
-  Future _readAndProcessAccessToken() async {
+  Future readAndProcessAccessToken() async {
     final readAccessToken = await _getAccessToken();
 
     if (readAccessToken == null) {

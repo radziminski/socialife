@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:socialife/services/api/entity/base.entity.dart';
 import 'package:socialife/services/exception/exceptions.dart';
@@ -85,13 +84,12 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
     if (isLoadingList || isFetchingList || fetchList == null) return;
 
     try {
-      setListError(false);
       if (!isRefetching) {
+        setListError(false);
         setListSuccess(false);
-        itemsList = null;
         setIsLoadingList(true);
       } else {
-        setListError(false);
+        setIsFetchingList(true);
       }
 
       final result = await fetchList!.call();
@@ -106,6 +104,7 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
       setListSuccess(true);
       onSuccess?.call(result);
     } catch (error) {
+      onError?.call(error);
       if (kDebugMode) {
         print('Model error of type ${error.runtimeType}');
         print(error);
@@ -121,7 +120,6 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
         rethrow;
       }
       setListError(true, error: UnknownException());
-      onError?.call(error);
     } finally {
       !isRefetching ? setIsLoadingList(false) : setIsFetchingList(false);
     }
@@ -138,8 +136,8 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
     try {
       if (!isRefetching) {
         setIsSuccess(id, false);
-        items.remove(id);
         setIsLoading(id, true);
+        setError(id, false);
       } else {
         setIsFetching(id, true);
       }
@@ -147,8 +145,11 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
       final result = await fetchItem!.call(id);
 
       setItem(result);
+      setError(id, false);
       onSuccess?.call(result);
     } catch (error) {
+      onError?.call(error);
+
       if (kDebugMode) {
         print('Model error:');
         print(error);
@@ -166,7 +167,6 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
       }
       setError(id, true, error: UnknownException());
       setIsSuccess(id, true);
-      onError?.call(error);
     } finally {
       !isRefetching ? setIsLoading(id, false) : setIsFetching(id, false);
     }
@@ -184,6 +184,22 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
     notifyListeners();
 
     getItem(id);
+  }
+
+  void clear() {
+    isLoadingList = false;
+    isFetchingList = false;
+    isListError = false;
+    isListSuccess = false;
+    listError = null;
+    itemsList = null;
+
+    isLoading = {};
+    isFetching = {};
+    isError = {};
+    isSuccess = {};
+    errors = {};
+    items = {};
   }
 
   void refetchList() {

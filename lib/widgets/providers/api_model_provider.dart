@@ -42,14 +42,14 @@ class _ApiModelProviderState<T extends BaseApiModel>
     super.initState();
   }
 
-  void fetchList() {
+  void fetchList({bool hard = false}) {
     if (!widget.isListProvider) {
       return;
     }
 
     lastRefetch = DateTime.now();
 
-    if (model.isListSuccess && model.itemsList != null) {
+    if (model.isListSuccess && model.itemsList != null && !hard) {
       model.refetchList();
       return;
     }
@@ -57,7 +57,7 @@ class _ApiModelProviderState<T extends BaseApiModel>
     model.getList();
   }
 
-  void fetchItem() {
+  void fetchItem({bool hard = false}) {
     if (!widget.isItemProvider) {
       return;
     }
@@ -75,7 +75,8 @@ class _ApiModelProviderState<T extends BaseApiModel>
 
     if (model.isSuccess[itemId] != null &&
         model.isSuccess[itemId]! &&
-        model.items[itemId] != null) {
+        model.items[itemId] != null &&
+        !hard) {
       model.refetchItem(itemId);
       return;
     }
@@ -154,7 +155,7 @@ class _ApiModelProviderState<T extends BaseApiModel>
           final visiblePercentage = visibilityInfo.visibleFraction * 100;
           if (visiblePercentage > 20 &&
               lastRefetch != null &&
-              DateTime.now().difference(lastRefetch!).inSeconds > 30) {
+              DateTime.now().difference(lastRefetch!).inSeconds > 15) {
             fetchList();
             fetchItem();
           }
@@ -168,6 +169,10 @@ class _ApiModelProviderState<T extends BaseApiModel>
               : null,
           error: error,
           child: widget.builder(context, model, child),
+          onReload: () {
+            fetchList(hard: true);
+            fetchItem(hard: true);
+          },
         ),
       );
     });

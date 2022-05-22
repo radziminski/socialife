@@ -14,3 +14,4 @@ const kGray50Color = Color(0xFF9EB3B5);
 const kGray60Color = Color(0xFFBBCACB);
 // const kBackgroundColor = Color(0xFF051515);
 const kBackgroundColor = kGray10Color;
+const kErrorColor = Color(0xFFEF3C4E);

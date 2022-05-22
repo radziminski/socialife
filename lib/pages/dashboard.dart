@@ -9,21 +9,24 @@ class DashboardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AutoTabsScaffold(
-      navigatorObservers: () => [HeroController()],
-      backgroundColor: kGray10Color,
-      routes: const [
-        EventsRouter(),
-        SearchRouter(),
-        TicketsRouter(),
-        AccountRouter(),
-      ],
-      bottomNavigationBuilder: (_, tabsRouter) {
-        return BottomNavbar(
-          currentIndex: tabsRouter.activeIndex,
-          onTap: tabsRouter.setActiveIndex,
-        );
-      },
+    return WillPopScope(
+      onWillPop: () => Future.value(false),
+      child: AutoTabsScaffold(
+        navigatorObservers: () => [HeroController()],
+        backgroundColor: kGray10Color,
+        routes: const [
+          EventsRouter(),
+          SearchRouter(),
+          TicketsRouter(),
+          AccountRouter(),
+        ],
+        bottomNavigationBuilder: (_, tabsRouter) {
+          return BottomNavbar(
+            currentIndex: tabsRouter.activeIndex,
+            onTap: tabsRouter.setActiveIndex,
+          );
+        },
+      ),
     );
   }
 }

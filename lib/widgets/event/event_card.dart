@@ -18,14 +18,14 @@ class EventCard extends StatelessWidget {
     return GestureDetector(
       onTap: () => AutoRouter.of(context).push(EventRoute(eventId: event.id)),
       child: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(8.0),
         child: Container(
           height: 250,
-          width: 140,
+          width: 180,
           decoration: BoxDecoration(
             color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
                 .withOpacity(1.0),
-            borderRadius: BorderRadius.circular(24),
+            borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

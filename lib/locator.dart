@@ -5,16 +5,18 @@ import 'package:socialife/services/secure-storage/secure_storage.dart';
 import 'package:socialife/store/event.model.dart';
 import 'package:socialife/store/payment.model.dart';
 import 'package:socialife/store/ticket.model.dart';
+import 'package:socialife/store/user_model.dart';
 
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
   // Services
   locator.registerSingleton(SecureStorageServiceSingleton());
-  locator.registerSingleton(RequestServiceSingleton());
   locator.registerSingleton(TokensServiceSingleton());
+  locator.registerSingleton(RequestServiceSingleton());
 
   // Models
+  locator.registerSingleton(UserModelSingleton());
   locator.registerLazySingleton(() => EventModelSingleton());
   locator.registerLazySingleton(() => TicketModelSingleton());
   locator.registerLazySingleton(() => PaymentModelSingleton());
