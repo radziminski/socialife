@@ -34,12 +34,17 @@ class _ApiModelProviderState<T extends BaseApiModel>
     extends State<ApiModelProvider<T>> {
   final model = locator<T>();
   DateTime? lastRefetch;
+  bool hasFetchedOnce = false;
 
   @override
   void initState() {
-    fetchList();
-    fetchItem();
     super.initState();
+    Future.delayed(const Duration(milliseconds: 100)).then((_) {
+      if (mounted) {
+        fetchList();
+        fetchItem();
+      }
+    });
   }
 
   void fetchList({bool hard = false}) {
@@ -55,10 +60,11 @@ class _ApiModelProviderState<T extends BaseApiModel>
     }
 
     model.getList();
+    hasFetchedOnce = true;
   }
 
   void fetchItem({bool hard = false}) {
-    if (!widget.isItemProvider) {
+    if (!widget.isItemProvider || !mounted) {
       return;
     }
 
@@ -85,7 +91,7 @@ class _ApiModelProviderState<T extends BaseApiModel>
   }
 
   bool checkIfLoading() {
-    if (widget.isListProvider) {
+    if (widget.isListProvider || !mounted) {
       return model.isLoadingList;
     }
 
@@ -155,7 +161,9 @@ class _ApiModelProviderState<T extends BaseApiModel>
           final visiblePercentage = visibilityInfo.visibleFraction * 100;
           if (visiblePercentage > 20 &&
               lastRefetch != null &&
-              DateTime.now().difference(lastRefetch!).inSeconds > 15) {
+              DateTime.now().difference(lastRefetch!).inSeconds > 15 &&
+              hasFetchedOnce &&
+              mounted) {
             fetchList();
             fetchItem();
           }

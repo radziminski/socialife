@@ -3,6 +3,7 @@ import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/layout/column_with_spacing.dart';
 import 'package:socialife/widgets/layout/page_padding.dart';
 import 'package:socialife/widgets/layout/page_wrapper.dart';
+import 'package:socialife/widgets/message/info_message.dart';
 import 'package:socialife/widgets/providers/ticket_provider.dart';
 import 'package:socialife/widgets/ticket/ticket_card.dart';
 import 'package:socialife/widgets/typography/page_header.dart';
@@ -28,17 +29,27 @@ class TicketsPage extends StatelessWidget {
               color: kPrimaryColor,
               child: ListView(
                 children: [
-                  PagePadding(
-                    child: Expanded(
-                      child: ColumnWithSpacing(
-                        spacing: 16,
-                        children: model.itemsList
-                                ?.map((ticket) => TicketCard(ticket: ticket))
-                                .toList() ??
-                            [],
-                      ),
-                    ),
-                  ),
+                  model.itemsList != null && model.itemsList!.isNotEmpty
+                      ? PagePadding(
+                          child: Expanded(
+                            child: ColumnWithSpacing(
+                              spacing: 16,
+                              children: model.itemsList
+                                      ?.map((ticket) =>
+                                          TicketCard(ticket: ticket))
+                                      .toList() ??
+                                  [],
+                            ),
+                          ),
+                        )
+                      : const SizedBox(
+                          height: 500,
+                          child: Center(
+                            child: InfoMessage(
+                                icon: Icons.discount,
+                                message: 'You don\t have any tickets yet'),
+                          ),
+                        ),
                 ],
               ),
             ),

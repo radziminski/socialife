@@ -97,3 +97,13 @@ class AppInitException extends BaseException {
           description: 'Make sure you have internet connection and try again',
         );
 }
+
+class BadRequestException extends RequestException {
+  BadRequestException({String? title, String? description})
+      : super(
+          code: 400,
+          title: title ?? 'Invalid request',
+          description: description ??
+              'Make sure you provided data is correct and try again',
+        );
+}

@@ -12,8 +12,8 @@ enum UserRole {
 class User extends BaseEntity {
   late String email;
   late UserRole role = UserRole.user;
-  late Profile? profile;
-  late OrganizationProfile? organizationProfile;
+  Profile? profile;
+  OrganizationProfile? organizationProfile;
 
   User(Json json) : super(json) {
     email = json['email'];

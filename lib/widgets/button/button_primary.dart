@@ -28,7 +28,7 @@ class ButtonPrimary extends StatelessWidget {
             backgroundColor: MaterialStateProperty.all(kPrimaryColor),
             overlayColor: MaterialStateProperty.all(kPrimaryDarkColor),
           ),
-          onPressed: onPressed,
+          onPressed: !isLoading ? onPressed : () {},
           child: isLoading
               ? Center(
                   child: Transform.scale(

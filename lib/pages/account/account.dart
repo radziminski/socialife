@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:socialife/services/user/entity/user.entity.dart';
 import 'package:socialife/store/user_model.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/account/account_field.dart';
 import 'package:socialife/widgets/account/logout_button.dart';
+import 'package:socialife/widgets/account/organization_details.dart';
+import 'package:socialife/widgets/account/user_details.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
 import 'package:socialife/widgets/gravatar/user_gravatar.dart';
 import 'package:socialife/widgets/layout/column_with_spacing.dart';
@@ -51,35 +54,19 @@ class AccountPage extends StatelessWidget {
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
                             ),
-                            child: ColumnWithSpacing(
-                              spacing: 24,
-                              children: [
-                                AccountField(
-                                  label: 'email',
-                                  value: model.user?.email,
-                                ),
-                                AccountField(
-                                  label: 'first name',
-                                  value: model.user?.profile?.firstName,
-                                ),
-                                AccountField(
-                                  label: 'last name',
-                                  value: model.user?.profile?.lastName,
-                                ),
-                                const SizedBox(),
-                                ButtonPrimary(
-                                  icon: Icons.edit,
-                                  label: 'Edit',
-                                  onPressed: () {},
-                                ),
-                                const LogoutButton(),
-                              ],
-                            ),
+                            child: model.user != null
+                                ? model.user?.role == UserRole.user
+                                    ? UserDetails(profile: model.user?.profile)
+                                    : OrganizationDetails(
+                                        profile:
+                                            model.user?.organizationProfile)
+                                : null,
                           ),
                         ),
-                        const SizedBox(
-                          height: 150,
-                        ),
+                        if (model.user?.role == UserRole.user)
+                          const SizedBox(
+                            height: 150,
+                          ),
                       ],
                     ),
                   )),

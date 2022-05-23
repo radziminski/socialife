@@ -5,6 +5,7 @@ import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/services/user/api/login.request.dart';
 import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/services/user/dto/login.dto.dart';
+import 'package:socialife/store/user_model.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -30,11 +31,6 @@ class _LoginPageState extends State<LoginPage> {
   BaseException? error;
 
   Future onSubmit(BuildContext context) async {
-    if (TokensService.isAuthenticated) {
-      AutoRouter.of(context).push(const DashboardRoute());
-      return;
-    }
-
     setState(() {
       isLoading = true;
       isError = false;
@@ -48,7 +44,20 @@ class _LoginPageState extends State<LoginPage> {
         ),
       );
       await TokensService.setAccessToken(response.accessToken);
-      return AutoRouter.of(context).push(const DashboardRoute());
+      UserModel.getUser(onSuccess: (user) {
+        setState(() {
+          isError = false;
+          isLoading = false;
+          if (user.profile != null) {
+            UserModel.setUser(user);
+            AutoRouter.of(context).push(const DashboardRoute());
+          } else {
+            AutoRouter.of(context).push(const RegisterUserRoute());
+          }
+        });
+      }, onError: (error) {
+        throw error;
+      });
     } catch (error) {
       setState(() {
         isLoading = false;
@@ -101,7 +110,7 @@ class _LoginPageState extends State<LoginPage> {
                 delay: const Duration(milliseconds: 50),
                 duration: const Duration(milliseconds: 200),
                 child: ColumnWithSpacing(
-                  spacing: 20,
+                  spacing: 18,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Column(
@@ -123,9 +132,11 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                     TextInput(
                       controller: emailController,
+                      placeholder: 'Email',
                     ),
                     TextInput(
                       controller: passwordController,
+                      placeholder: 'Password',
                     ),
                     if (isError)
                       ErrorCard(
@@ -139,6 +150,23 @@ class _LoginPageState extends State<LoginPage> {
                     ),
                   ],
                 ),
+              ),
+              const SizedBox(height: 8),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    height: 40,
+                    child: TextButton(
+                      onPressed: () {
+                        AutoRouter.of(context).push(const RegisterRoute());
+                      },
+                      child: Text('Don\'t have account? Sign up here.',
+                          style:
+                              TextStyle(color: kPrimaryColor.withOpacity(0.8))),
+                    ),
+                  ),
+                ],
               ),
             ],
           ),

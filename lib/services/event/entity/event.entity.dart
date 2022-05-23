@@ -51,8 +51,9 @@ class Event extends BaseEntity {
         ? getEventCategoryFromString(json['category'])
         : EventCategory.other;
     likesNumber = json['likesNumber'];
-    externalImageUrls =
-        parseList(json['externalImageUrls'], (json) => json.toString());
+    externalImageUrls = json['externalImageUrls'] != null
+        ? [...json['externalImageUrls']]
+        : null;
     ticketTypes = [];
     likes = [];
 

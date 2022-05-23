@@ -31,7 +31,9 @@ class _UserProviderState extends State<UserProvider> {
   @override
   void initState() {
     super.initState();
-    fetchUser();
+    if (model.user?.profile == null) {
+      fetchUser();
+    }
   }
 
   void fetchUser({bool hard = false}) {

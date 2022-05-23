@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 import 'package:socialife/constants/config.dart';
 import 'package:socialife/locator.dart';
+import 'package:socialife/services/api/response/error.response.dart';
 import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/types.dart';
@@ -104,6 +105,9 @@ class RequestServiceSingleton {
       return response.data!;
     } catch (error) {
       if (error is DioError) {
+        final response = error.response?.data != null
+            ? ErrorResponse(error.response?.data)
+            : null;
         if (error.response?.statusCode != null) {
           if (error.response!.statusCode == 401) {
             throw UnauthorizedException();
@@ -111,11 +115,14 @@ class RequestServiceSingleton {
           if (error.response!.statusCode == 403) {
             throw ForbiddenException();
           }
+          if (error.response!.statusCode == 400) {
+            throw BadRequestException(description: response?.message[0]);
+          }
           if (error.response!.statusCode! > 500) {
             throw UnavailableException();
           }
           if (error.response!.statusCode == 500) {
-            throw UnknownRequestException();
+            throw UnknownRequestException(description: response?.message[0]);
           }
         }
 

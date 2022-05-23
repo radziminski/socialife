@@ -13,6 +13,13 @@ class UserModelSingleton extends ChangeNotifier {
   User? user;
   bool didLogout = false;
 
+  void setUser(User user) {
+    user = user;
+    isSuccess = true;
+    isError = false;
+    didLogout = false;
+  }
+
   void getUser({
     Function(User result)? onSuccess,
     Function(Object error)? onError,

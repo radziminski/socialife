@@ -30,7 +30,7 @@ class AccountField extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              value ?? '-',
+              value != null && value!.isNotEmpty ? value! : '-',
               style: const TextStyle(
                 color: kGray60Color,
                 fontSize: 16,
