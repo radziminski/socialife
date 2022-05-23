@@ -42,6 +42,7 @@ abstract class BaseApiMutationModel<P, T> extends ChangeNotifier {
 
     try {
       clear();
+      setIsLoading(true);
 
       final result = await mutateFn!.call(payload);
 
