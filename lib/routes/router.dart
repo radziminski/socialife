@@ -10,6 +10,7 @@ import 'package:socialife/pages/events/event.dart';
 import 'package:socialife/pages/events/events.dart';
 import 'package:socialife/pages/events/events_home.dart';
 import 'package:socialife/pages/dashboard.dart';
+import 'package:socialife/pages/events/events_organization_home.dart';
 import 'package:socialife/pages/events/liked_events.dart';
 import 'package:socialife/pages/events/organization.dart';
 import 'package:socialife/pages/events/organization_events.dart';
@@ -40,6 +41,10 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
             AutoRoute(
               path: '',
               page: EventsHomePage,
+            ),
+            AutoRoute(
+              path: 'organization',
+              page: EventsOrganizationHomePage,
             ),
             AutoRoute(
               path: 'explore',

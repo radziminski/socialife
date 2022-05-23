@@ -100,8 +100,10 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
         }
       }
 
-      setList(result);
-      setListSuccess(true);
+      itemsList = result;
+      isListSuccess = true;
+      notifyListeners();
+
       onSuccess?.call(result);
     } catch (error) {
       onError?.call(error);

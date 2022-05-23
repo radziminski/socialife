@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:socialife/styles/colors.dart';
 
 class PageWrapper extends StatelessWidget {
@@ -21,10 +22,13 @@ class PageWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget body = Scaffold(
       backgroundColor: kBackgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.only(top: topPadding),
-          child: child ?? Container(),
+      body: AnnotatedRegion<SystemUiOverlayStyle>(
+        value: SystemUiOverlayStyle.light,
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.only(top: topPadding),
+            child: child ?? Container(),
+          ),
         ),
       ),
     );
