@@ -5,6 +5,7 @@ import 'package:socialife/pages/auth/login.dart';
 import 'package:socialife/pages/auth/register.dart';
 import 'package:socialife/pages/auth/register_organization.dart';
 import 'package:socialife/pages/auth/register_user.dart';
+import 'package:socialife/pages/events/buy_ticket.dart';
 import 'package:socialife/pages/events/create_event.dart';
 import 'package:socialife/pages/events/event.dart';
 import 'package:socialife/pages/events/events.dart';
@@ -19,7 +20,6 @@ import 'package:socialife/pages/events/update_event_tickets.dart';
 import 'package:socialife/pages/search/organization_search.dart';
 import 'package:socialife/pages/search/search.dart';
 import 'package:socialife/pages/splash.dart';
-import 'package:socialife/pages/tickets/buy_ticket.dart';
 import 'package:socialife/pages/events/create_ticket_type.dart';
 import 'package:socialife/pages/tickets/payment.dart';
 import 'package:socialife/pages/tickets/payments.dart';
@@ -89,6 +89,10 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
               path: 'my-events',
               page: OrganizationEventsPage,
             ),
+            AutoRoute(
+              path: 'buy/:ticketTypeId',
+              page: BuyTicketPage,
+            )
           ],
         ),
         AutoRoute(
@@ -117,10 +121,6 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
             AutoRoute(
               path: ':ticketId',
               page: TicketPage,
-            ),
-            AutoRoute(
-              path: 'buy/:ticketId',
-              page: BuyTicketPage,
             ),
             AutoRoute(
               path: 'pay/:ticketId',

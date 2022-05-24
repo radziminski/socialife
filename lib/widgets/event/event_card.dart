@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
 import 'package:socialife/styles/colors.dart';
+import 'package:socialife/widgets/event/like_event_icon.dart';
 
 final List<String> mockImages = [
   'https://gfx.rozrywka.radiozet.pl/var/radiozetsg/storage/images/muzyka/fest-festival-dla-zaszczepionych-organizatorzy-odpieraja-ataki-nie-ma-wolnosci-bez-odpornosci/16366450-1-pol-PL/FEST-Festival-dla-zaszczepionych.-Organizatorzy-odpieraja-ataki-Nie-ma-wolnosci-bez-odpornosci_article.jpg',
@@ -84,7 +85,7 @@ class _EventCardState extends State<EventCard> {
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
                 decoration: BoxDecoration(
                   color: kPrimaryDarkColor,
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(14),
                   image: DecorationImage(
                     image: image,
                     fit: BoxFit.cover,
@@ -204,6 +205,13 @@ class _EventCardState extends State<EventCard> {
               left: 0,
               bottom: 0,
               right: 0,
+            ),
+            Positioned(
+              right: 10,
+              top: 10,
+              child: LikeEventIcon(
+                eventId: widget.event.id,
+              ),
             )
           ],
         ),

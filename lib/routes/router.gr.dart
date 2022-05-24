@@ -20,6 +20,7 @@ import '../pages/auth/register.dart' as _i3;
 import '../pages/auth/register_organization.dart' as _i5;
 import '../pages/auth/register_user.dart' as _i4;
 import '../pages/dashboard.dart' as _i1;
+import '../pages/events/buy_ticket.dart' as _i20;
 import '../pages/events/create_event.dart' as _i14;
 import '../pages/events/create_ticket_type.dart' as _i17;
 import '../pages/events/event.dart' as _i12;
@@ -32,14 +33,13 @@ import '../pages/events/organization_events.dart' as _i19;
 import '../pages/events/update_event.dart' as _i15;
 import '../pages/events/update_event_tickets.dart' as _i16;
 import '../pages/events/update_ticket_type.dart' as _i18;
-import '../pages/search/organization_search.dart' as _i21;
-import '../pages/search/search.dart' as _i20;
+import '../pages/search/organization_search.dart' as _i22;
+import '../pages/search/search.dart' as _i21;
 import '../pages/splash.dart' as _i6;
-import '../pages/tickets/buy_ticket.dart' as _i24;
 import '../pages/tickets/payment.dart' as _i25;
 import '../pages/tickets/payments.dart' as _i26;
-import '../pages/tickets/ticket.dart' as _i23;
-import '../pages/tickets/tickets.dart' as _i22;
+import '../pages/tickets/ticket.dart' as _i24;
+import '../pages/tickets/tickets.dart' as _i23;
 import '../pages/tickets/tickets_scan.dart' as _i27;
 import '../pages/tickets/validate_ticket.dart' as _i28;
 
@@ -167,17 +167,27 @@ class AppRouter extends _i7.RootStackRouter {
       return _i7.CupertinoPageX<dynamic>(
           routeData: routeData, child: const _i19.OrganizationEventsPage());
     },
+    BuyTicketRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<BuyTicketRouteArgs>(
+          orElse: () => BuyTicketRouteArgs(
+              ticketTypeId: pathParams.getInt('ticketTypeId')));
+      return _i7.CupertinoPageX<dynamic>(
+          routeData: routeData,
+          child: _i20.BuyTicketPage(
+              key: args.key, ticketTypeId: args.ticketTypeId));
+    },
     SearchRoute.name: (routeData) {
       return _i7.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i20.SearchPage());
+          routeData: routeData, child: const _i21.SearchPage());
     },
     OrganizationSearchRoute.name: (routeData) {
       return _i7.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i21.OrganizationSearchPage());
+          routeData: routeData, child: const _i22.OrganizationSearchPage());
     },
     TicketsRoute.name: (routeData) {
       return _i7.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i22.TicketsPage());
+          routeData: routeData, child: const _i23.TicketsPage());
     },
     TicketRoute.name: (routeData) {
       final pathParams = routeData.inheritedPathParams;
@@ -186,11 +196,7 @@ class AppRouter extends _i7.RootStackRouter {
               TicketRouteArgs(ticketId: pathParams.getInt('ticketId')));
       return _i7.CupertinoPageX<dynamic>(
           routeData: routeData,
-          child: _i23.TicketPage(key: args.key, ticketId: args.ticketId));
-    },
-    BuyTicketRoute.name: (routeData) {
-      return _i7.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i24.BuyTicketPage());
+          child: _i24.TicketPage(key: args.key, ticketId: args.ticketId));
     },
     PaymentRoute.name: (routeData) {
       return _i7.CupertinoPageX<dynamic>(
@@ -258,7 +264,9 @@ class AppRouter extends _i7.RootStackRouter {
                     path: 'update/:eventId/tickets/update/:ticketTypeId',
                     parent: EventsRouter.name),
                 _i7.RouteConfig(OrganizationEventsRoute.name,
-                    path: 'my-events', parent: EventsRouter.name)
+                    path: 'my-events', parent: EventsRouter.name),
+                _i7.RouteConfig(BuyTicketRoute.name,
+                    path: 'buy/:ticketTypeId', parent: EventsRouter.name)
               ]),
           _i7.RouteConfig(SearchRouter.name,
               path: 'search',
@@ -277,8 +285,6 @@ class AppRouter extends _i7.RootStackRouter {
                     path: '', parent: TicketsRouter.name),
                 _i7.RouteConfig(TicketRoute.name,
                     path: ':ticketId', parent: TicketsRouter.name),
-                _i7.RouteConfig(BuyTicketRoute.name,
-                    path: 'buy/:ticketId', parent: TicketsRouter.name),
                 _i7.RouteConfig(PaymentRoute.name,
                     path: 'pay/:ticketId', parent: TicketsRouter.name),
                 _i7.RouteConfig(PaymentsRoute.name,
@@ -588,7 +594,32 @@ class OrganizationEventsRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i20.SearchPage]
+/// [_i20.BuyTicketPage]
+class BuyTicketRoute extends _i7.PageRouteInfo<BuyTicketRouteArgs> {
+  BuyTicketRoute({_i31.Key? key, required int ticketTypeId})
+      : super(BuyTicketRoute.name,
+            path: 'buy/:ticketTypeId',
+            args: BuyTicketRouteArgs(key: key, ticketTypeId: ticketTypeId),
+            rawPathParams: {'ticketTypeId': ticketTypeId});
+
+  static const String name = 'BuyTicketRoute';
+}
+
+class BuyTicketRouteArgs {
+  const BuyTicketRouteArgs({this.key, required this.ticketTypeId});
+
+  final _i31.Key? key;
+
+  final int ticketTypeId;
+
+  @override
+  String toString() {
+    return 'BuyTicketRouteArgs{key: $key, ticketTypeId: $ticketTypeId}';
+  }
+}
+
+/// generated route for
+/// [_i21.SearchPage]
 class SearchRoute extends _i7.PageRouteInfo<void> {
   const SearchRoute() : super(SearchRoute.name, path: '');
 
@@ -596,7 +627,7 @@ class SearchRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i21.OrganizationSearchPage]
+/// [_i22.OrganizationSearchPage]
 class OrganizationSearchRoute extends _i7.PageRouteInfo<void> {
   const OrganizationSearchRoute()
       : super(OrganizationSearchRoute.name, path: 'organization');
@@ -605,7 +636,7 @@ class OrganizationSearchRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i22.TicketsPage]
+/// [_i23.TicketsPage]
 class TicketsRoute extends _i7.PageRouteInfo<void> {
   const TicketsRoute() : super(TicketsRoute.name, path: '');
 
@@ -613,7 +644,7 @@ class TicketsRoute extends _i7.PageRouteInfo<void> {
 }
 
 /// generated route for
-/// [_i23.TicketPage]
+/// [_i24.TicketPage]
 class TicketRoute extends _i7.PageRouteInfo<TicketRouteArgs> {
   TicketRoute({_i31.Key? key, required int ticketId})
       : super(TicketRoute.name,
@@ -635,14 +666,6 @@ class TicketRouteArgs {
   String toString() {
     return 'TicketRouteArgs{key: $key, ticketId: $ticketId}';
   }
-}
-
-/// generated route for
-/// [_i24.BuyTicketPage]
-class BuyTicketRoute extends _i7.PageRouteInfo<void> {
-  const BuyTicketRoute() : super(BuyTicketRoute.name, path: 'buy/:ticketId');
-
-  static const String name = 'BuyTicketRoute';
 }
 
 /// generated route for

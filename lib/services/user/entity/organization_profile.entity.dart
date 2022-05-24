@@ -11,8 +11,8 @@ class OrganizationProfile extends BaseEntity {
   late String? city;
 
   OrganizationProfile(Json json) : super(json) {
-    email = json['email'];
-    name = json['name'];
+    email = json['email'] ?? '';
+    name = json['name'] ?? '';
     description = json['description'];
     coverUrl = json['coverUrl'];
     website = json['website'];

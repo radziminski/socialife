@@ -18,7 +18,6 @@ class UnlikeEventModelSingleton extends BaseApiMutationModel<int, Event> {
     return super.mutate(
       payload,
       onSuccess: (result) {
-        EventModel.invalidateList();
         EventModel.invalidateItem(payload);
         onSuccess?.call(result);
       },

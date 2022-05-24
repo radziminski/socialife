@@ -19,8 +19,8 @@ class Payment extends BaseEntity {
   late int totalPrice;
   late int? vat;
   late int? fees;
-  late int? bankName;
-  late int? lastFourDigits;
+  late String? bankName;
+  late String? lastFourDigits;
   late PaymentMethod method;
   late PaymentStatus status;
   late List<Ticket> tickets;

@@ -8,6 +8,7 @@ import 'package:socialife/store/delete_event.model.dart';
 import 'package:socialife/store/edit_event.model.dart';
 import 'package:socialife/store/event.model.dart';
 import 'package:socialife/store/like_event.model.dart';
+import 'package:socialife/store/make_payment.model.dart';
 import 'package:socialife/store/organization_event.model.dart';
 import 'package:socialife/store/payment.model.dart';
 import 'package:socialife/store/ticket.model.dart';
@@ -36,4 +37,5 @@ void setupLocator() {
   locator.registerLazySingleton(() => UnlikeEventModelSingleton());
   locator.registerLazySingleton(() => CreateTicketTypeModelSingleton());
   locator.registerLazySingleton(() => UpdateTicketTypeModelSingleton());
+  locator.registerLazySingleton(() => MakePaymentModelSingleton());
 }

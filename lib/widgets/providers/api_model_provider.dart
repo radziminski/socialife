@@ -10,6 +10,7 @@ import 'package:visibility_detector/visibility_detector.dart';
 class ApiModelProvider<T extends BaseApiModel> extends StatefulWidget {
   final bool isListProvider;
   final bool isItemProvider;
+  final bool showLoader;
   final int? itemId;
   final Widget? loadingWidget;
   final Widget Function(BuildContext context, BaseException error)?
@@ -21,6 +22,7 @@ class ApiModelProvider<T extends BaseApiModel> extends StatefulWidget {
     required this.builder,
     this.isListProvider = false,
     this.isItemProvider = false,
+    this.showLoader = true,
     this.itemId,
     this.loadingWidget,
     this.errorWidgetBuilder,
@@ -169,7 +171,7 @@ class _ApiModelProviderState<T extends BaseApiModel>
           }
         },
         child: FutureContentWrapper(
-          isLoading: checkIfLoading(),
+          isLoading: checkIfLoading() && widget.showLoader,
           isError: checkIfError(),
           loadingWidget: widget.loadingWidget,
           errorWidget: widget.errorWidgetBuilder != null && error != null

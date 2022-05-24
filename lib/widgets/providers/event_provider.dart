@@ -6,6 +6,7 @@ import 'package:socialife/widgets/providers/api_model_provider.dart';
 class EventProvider extends StatelessWidget {
   final bool isListProvider;
   final bool isItemProvider;
+  final bool showLoader;
   final int? itemId;
   final Widget? loadingWidget;
   final Widget Function(BuildContext context, BaseException error)?
@@ -21,6 +22,7 @@ class EventProvider extends StatelessWidget {
     this.itemId,
     this.loadingWidget,
     this.errorWidgetBuilder,
+    this.showLoader = true,
   }) : super(key: key);
 
   @override
@@ -33,6 +35,7 @@ class EventProvider extends StatelessWidget {
       itemId: itemId,
       loadingWidget: loadingWidget,
       errorWidgetBuilder: errorWidgetBuilder,
+      showLoader: showLoader,
     );
   }
 }

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:auto_route/auto_route.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -7,8 +5,6 @@ import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/event/event_card.dart';
-
-const kCardHeight = 120.0;
 
 class EventHorizontalCard extends StatefulWidget {
   final Event event;
@@ -47,7 +43,7 @@ class _EventHorizontalCardState extends State<EventHorizontalCard> {
             CachedNetworkImage(
               imageUrl: getImageLink(),
               imageBuilder: (context, image) => Container(
-                height: kCardHeight,
+                height: 120,
                 width: double.infinity,
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
