@@ -27,11 +27,11 @@ class UserDetails extends StatelessWidget {
           value: profile?.lastName,
         ),
         const SizedBox(),
-        ButtonPrimary(
-          icon: Icons.edit,
-          label: 'Edit',
-          onPressed: () {},
-        ),
+        // ButtonPrimary(
+        //   icon: Icons.edit,
+        //   label: 'Edit',
+        //   onPressed: () {},
+        // ),
         const LogoutButton(),
       ],
     );

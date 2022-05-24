@@ -15,15 +15,18 @@ import 'package:socialife/pages/events/liked_events.dart';
 import 'package:socialife/pages/events/organization.dart';
 import 'package:socialife/pages/events/organization_events.dart';
 import 'package:socialife/pages/events/update_event.dart';
+import 'package:socialife/pages/events/update_event_tickets.dart';
+import 'package:socialife/pages/search/organization_search.dart';
 import 'package:socialife/pages/search/search.dart';
 import 'package:socialife/pages/splash.dart';
 import 'package:socialife/pages/tickets/buy_ticket.dart';
-import 'package:socialife/pages/tickets/create_ticket_type.dart';
+import 'package:socialife/pages/events/create_ticket_type.dart';
 import 'package:socialife/pages/tickets/payment.dart';
 import 'package:socialife/pages/tickets/payments.dart';
 import 'package:socialife/pages/tickets/ticket.dart';
 import 'package:socialife/pages/tickets/tickets.dart';
-import 'package:socialife/pages/tickets/update_ticket_type.dart';
+import 'package:socialife/pages/events/update_ticket_type.dart';
+import 'package:socialife/pages/tickets/tickets_scan.dart';
 import 'package:socialife/pages/tickets/validate_ticket.dart';
 
 @CupertinoAutoRouter(
@@ -67,8 +70,20 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
               page: CreateEventPage,
             ),
             AutoRoute(
-              path: 'update/:id',
+              path: 'update/:eventId',
               page: UpdateEventPage,
+            ),
+            AutoRoute(
+              path: 'update/:eventId/tickets',
+              page: UpdateEventTicketsPage,
+            ),
+            AutoRoute(
+              path: 'update/:eventId/tickets/create-type',
+              page: CreateTicketTypePage,
+            ),
+            AutoRoute(
+              path: 'update/:eventId/tickets/update/:ticketTypeId',
+              page: UpdateTicketTypePage,
             ),
             AutoRoute(
               path: 'my-events',
@@ -77,10 +92,19 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
           ],
         ),
         AutoRoute(
-          path: 'search',
-          name: 'SearchRouter',
-          page: SearchPage,
-        ),
+            path: 'search',
+            name: 'SearchRouter',
+            page: EmptyRouterPage,
+            children: [
+              AutoRoute(
+                path: '',
+                page: SearchPage,
+              ),
+              AutoRoute(
+                path: 'organization',
+                page: OrganizationSearchPage,
+              ),
+            ]),
         AutoRoute(
           path: 'tickets',
           name: 'TicketsRouter',
@@ -107,15 +131,11 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
               page: PaymentsPage,
             ),
             AutoRoute(
-              path: 'create-type',
-              page: CreateTicketTypePage,
+              path: 'tickets-scan',
+              page: TicketsScanPage,
             ),
             AutoRoute(
-              path: 'update-type',
-              page: UpdateTicketTypePage,
-            ),
-            AutoRoute(
-              path: 'validate/:eventId/:ticketTypeId',
+              path: 'validate/:eventId',
               page: ValidateTicketPage,
             ),
           ],

@@ -5,6 +5,7 @@ import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/services/user/api/login.request.dart';
 import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/services/user/dto/login.dto.dart';
+import 'package:socialife/services/user/entity/user.entity.dart';
 import 'package:socialife/store/user_model.dart';
 import 'package:socialife/styles/colors.dart';
 import 'package:socialife/widgets/animations/fade_in.dart';
@@ -48,13 +49,22 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           isError = false;
           isLoading = false;
+        });
+        if (user.role == UserRole.user) {
           if (user.profile != null) {
             UserModel.setUser(user);
             AutoRouter.of(context).push(const DashboardRoute());
           } else {
             AutoRouter.of(context).push(const RegisterUserRoute());
           }
-        });
+        } else {
+          if (user.organizationProfile != null) {
+            UserModel.setUser(user);
+            AutoRouter.of(context).push(const DashboardRoute());
+          } else {
+            AutoRouter.of(context).push(const RegisterOrganizationRoute());
+          }
+        }
       }, onError: (error) {
         throw error;
       });
@@ -137,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
                     TextInput(
                       controller: passwordController,
                       placeholder: 'Password',
+                      isPassword: true,
                     ),
                     if (isError)
                       ErrorCard(

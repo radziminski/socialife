@@ -24,6 +24,7 @@ class UserModelSingleton extends ChangeNotifier {
     Function(User result)? onSuccess,
     Function(Object error)? onError,
     bool isRefetching = false,
+    bool notifyOnInit = false,
   }) async {
     if (isLoading || isFetching) return;
 
@@ -34,7 +35,7 @@ class UserModelSingleton extends ChangeNotifier {
         isSuccess = false;
         isLoading = true;
       }
-      notifyListeners();
+      if (notifyOnInit) notifyListeners();
 
       final result = await getMe();
 
@@ -80,7 +81,6 @@ class UserModelSingleton extends ChangeNotifier {
     error = null;
     isSuccess = false;
     didLogout = true;
-    notifyListeners();
   }
 
   void clearDidLogout() {

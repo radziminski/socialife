@@ -11,6 +11,8 @@ class TextInput extends StatelessWidget {
     this.placeholder,
     this.isError = false,
     this.error,
+    this.type,
+    this.isPassword = false,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -18,6 +20,8 @@ class TextInput extends StatelessWidget {
   final String? placeholder;
   final bool isError;
   final BaseException? error;
+  final TextInputType? type;
+  final bool isPassword;
 
   @override
   Widget build(BuildContext context) {
@@ -39,6 +43,8 @@ class TextInput extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(6.0),
             child: TextField(
+              obscureText: isPassword,
+              keyboardType: type,
               controller: controller,
               style: const TextStyle(
                 fontSize: 14,

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socialife/services/user/entity/organization_profile.entity.dart';
-import 'package:socialife/services/user/entity/profile.entity.dart';
 import 'package:socialife/widgets/account/account_field.dart';
 import 'package:socialife/widgets/account/logout_button.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -40,12 +39,15 @@ class OrganizationDetails extends StatelessWidget {
           value: profile?.website,
         ),
         const SizedBox(),
-        ButtonPrimary(
-          icon: Icons.edit,
-          label: 'Edit',
-          onPressed: () {},
-        ),
+        // ButtonPrimary(
+        //   icon: Icons.edit,
+        //   label: 'Edit',
+        //   onPressed: () {},
+        // ),
         const LogoutButton(),
+        const SizedBox(
+          height: 50,
+        ),
       ],
     );
   }

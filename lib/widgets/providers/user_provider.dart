@@ -49,36 +49,34 @@ class _UserProviderState extends State<UserProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: StateProvider<UserModelSingleton>(
-        builder: (context, model, child) {
-          return VisibilityDetector(
-            key: widget.key ?? const Key('unknown'),
-            onVisibilityChanged: (visibilityInfo) {
-              final visiblePercentage = visibilityInfo.visibleFraction * 100;
-              if (visiblePercentage > 20 &&
-                  lastRefetch != null &&
-                  DateTime.now().difference(lastRefetch!).inSeconds > 15) {
-                fetchUser();
-              }
+    return StateProvider<UserModelSingleton>(
+      builder: (context, model, child) {
+        return VisibilityDetector(
+          key: widget.key ?? const Key('unknown'),
+          onVisibilityChanged: (visibilityInfo) {
+            final visiblePercentage = visibilityInfo.visibleFraction * 100;
+            if (visiblePercentage > 20 &&
+                lastRefetch != null &&
+                DateTime.now().difference(lastRefetch!).inSeconds > 15) {
+              fetchUser();
+            }
+          },
+          child: FutureContentWrapper(
+            isLoading: model.isLoading,
+            isError: model.isError,
+            loadingWidget: widget.loadingWidget,
+            errorWidget:
+                widget.errorWidgetBuilder != null && model.error != null
+                    ? widget.errorWidgetBuilder!(context, model.error!)
+                    : null,
+            error: model.error,
+            child: widget.builder(context, model, child),
+            onReload: () {
+              fetchUser(hard: true);
             },
-            child: FutureContentWrapper(
-              isLoading: model.isLoading,
-              isError: model.isError,
-              loadingWidget: widget.loadingWidget,
-              errorWidget:
-                  widget.errorWidgetBuilder != null && model.error != null
-                      ? widget.errorWidgetBuilder!(context, model.error!)
-                      : null,
-              error: model.error,
-              child: widget.builder(context, model, child),
-              onReload: () {
-                fetchUser(hard: true);
-              },
-            ),
-          );
-        },
-      ),
+          ),
+        );
+      },
     );
   }
 }

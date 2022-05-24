@@ -78,6 +78,5 @@ abstract class BaseApiMutationModel<P, T> extends ChangeNotifier {
     isSuccess = false;
     isLoading = false;
     lastResult = null;
-    notifyListeners();
   }
 }

@@ -1,9 +1,9 @@
 import 'package:socialife/constants/api_routes.dart';
 import 'package:socialife/services/api/request.dart';
-import 'package:socialife/services/ticket/dto/update_ticket_type.dart';
+import 'package:socialife/services/ticket/dto/update_ticket_type.dto.dart';
 import 'package:socialife/services/ticket/entity/ticket_type.entity.dart';
 
-Future<TicketType> updateTicketType(
+Future<TicketType> editTicketType(
   int eventId,
   int ticketTypeId,
   UpdateTicketTypeDto dto,

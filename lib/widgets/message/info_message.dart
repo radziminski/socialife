@@ -15,10 +15,12 @@ class InfoMessage extends StatelessWidget {
         children: [
           Icon(icon),
           const SizedBox(width: 12),
-          Text(message,
-              style: const TextStyle(
-                fontWeight: FontWeight.w500,
-              )),
+          Flexible(
+            child: Text(message,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w500,
+                )),
+          ),
         ],
       ),
     );

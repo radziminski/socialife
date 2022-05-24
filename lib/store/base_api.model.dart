@@ -148,6 +148,8 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
 
       setItem(result);
       setError(id, false);
+      setIsSuccess(id, true);
+
       onSuccess?.call(result);
     } catch (error) {
       onError?.call(error);
@@ -168,7 +170,7 @@ abstract class BaseApiModel<T extends BaseEntity> extends ChangeNotifier {
         rethrow;
       }
       setError(id, true, error: UnknownException());
-      setIsSuccess(id, true);
+      setIsSuccess(id, false);
     } finally {
       !isRefetching ? setIsLoading(id, false) : setIsFetching(id, false);
     }

@@ -1,6 +1,7 @@
 import 'package:socialife/services/api/api.utils.dart';
 import 'package:socialife/services/api/entity/base.entity.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
+import 'package:socialife/services/ticket/dto/create_ticket_type.dto.dart';
 import 'package:socialife/types.dart';
 
 class TicketType extends BaseEntity {
@@ -18,5 +19,14 @@ class TicketType extends BaseEntity {
     price = json['price'];
     availableTillDate = parseNullableDate(json['availableTillDate']);
     event = json['event'] != null ? Event(json['event']) : null;
+  }
+
+  CreateTicketTypeDto toCreateDto() {
+    return CreateTicketTypeDto(
+      title: title,
+      price: price,
+      description: description,
+      availableTillDate: availableTillDate,
+    );
   }
 }

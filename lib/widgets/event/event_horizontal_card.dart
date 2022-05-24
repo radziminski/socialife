@@ -18,7 +18,7 @@ class EventHorizontalCard extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Container(
           height: 80,
-          width: 180,
+          width: double.infinity,
           decoration: BoxDecoration(
             color: Color((Random().nextDouble() * 0xFFFFFF).toInt())
                 .withOpacity(1.0),

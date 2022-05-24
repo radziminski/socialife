@@ -262,10 +262,12 @@ class _RegisterPageState extends State<RegisterPage> {
                     TextInput(
                       controller: passwordController,
                       placeholder: 'Password',
+                      isPassword: true,
                     ),
                     TextInput(
                       controller: repeatPasswordController,
                       placeholder: 'Repeat Password',
+                      isPassword: true,
                     ),
                     if (isError)
                       ErrorCard(

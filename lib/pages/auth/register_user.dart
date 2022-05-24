@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/services/user/api/create_user_profile.request.dart';
-import 'package:socialife/services/tokens/tokens_service.dart';
 import 'package:socialife/services/user/dto/create_user_profile.dto.dart';
 import 'package:socialife/store/user_model.dart';
 import 'package:socialife/styles/colors.dart';

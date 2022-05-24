@@ -36,7 +36,7 @@ class PageHeader extends StatelessWidget {
               child: Text(
                 title,
                 style: TextStyle(
-                  fontSize: compact ? 24 : 32,
+                  fontSize: compact ? 22 : 32,
                   fontWeight: FontWeight.w500,
                 ),
               ),
