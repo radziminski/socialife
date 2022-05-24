@@ -6,6 +6,7 @@ class ErrorCard extends StatelessWidget {
   final BaseException error;
   final Function()? onReload;
   final bool compact;
+
   const ErrorCard({
     Key? key,
     this.error = const UnknownException(),

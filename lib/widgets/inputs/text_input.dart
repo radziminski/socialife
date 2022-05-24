@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/styles/colors.dart';
+import 'package:socialife/widgets/error/error_card.dart';
 
 class TextInput extends StatelessWidget {
-  const TextInput(
-      {Key? key, required this.controller, this.label, this.placeholder})
-      : super(key: key);
+  const TextInput({
+    Key? key,
+    required this.controller,
+    this.label,
+    this.placeholder,
+    this.isError = false,
+    this.error,
+  }) : super(key: key);
 
   final TextEditingController controller;
   final String? label;
   final String? placeholder;
+  final bool isError;
+  final BaseException? error;
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +49,9 @@ class TextInput extends StatelessWidget {
                   color: kGray40Color,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(
+                  borderSide: BorderSide(
                     width: 1,
-                    color: kGray40Color,
+                    color: isError ? kErrorColor : kGray40Color,
                   ),
                   borderRadius: BorderRadius.circular(6),
                 ),
@@ -59,6 +68,12 @@ class TextInput extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 8),
+          if (isError && error != null)
+            ErrorCard(
+              error: error!,
+              compact: true,
+            ),
         ],
       ),
     );

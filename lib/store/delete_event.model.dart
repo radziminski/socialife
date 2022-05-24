@@ -1,11 +1,11 @@
-import 'package:socialife/services/event/api/cancel_event.request.dart';
+import 'package:socialife/services/event/api/delete_event.request.dart';
 import 'package:socialife/store/base_api_mutation.model.dart';
 import 'package:socialife/store/organization_event.model.dart';
 
 class DeleteEventModelSingleton extends BaseApiMutationModel<int, void> {
   DeleteEventModelSingleton()
       : super(
-          mutateFn: cancelEvent,
+          mutateFn: deleteEvent,
         );
 
   @override

@@ -1,4 +1,5 @@
 import 'package:socialife/services/api/dto/base.dto.dart';
+import 'package:socialife/services/event/dto/create_event.dto.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
 import 'package:socialife/types.dart';
 
@@ -12,7 +13,8 @@ class UpdateEventDto extends BaseDto {
   String? longitude;
   String? latitude;
   EventCategory? category;
-  bool isCanceled;
+  List<String>? externalImageUrls;
+  bool isCanceled = false;
 
   UpdateEventDto({
     required this.title,
@@ -25,7 +27,21 @@ class UpdateEventDto extends BaseDto {
     this.latitude,
     this.category,
     this.isCanceled = false,
+    this.externalImageUrls = const [],
   });
+
+  UpdateEventDto.fromCreate(CreateEventDto dto) {
+    title = dto.title;
+    description = dto.description;
+    startDate = dto.startDate;
+    endDate = dto.endDate;
+    locationName = dto.locationName;
+    locationRef = dto.locationRef;
+    longitude = dto.longitude;
+    latitude = dto.latitude;
+    category = dto.category;
+    externalImageUrls = dto.externalImageUrls;
+  }
 
   @override
   Json toJson() {
@@ -40,6 +56,7 @@ class UpdateEventDto extends BaseDto {
       'latitude': latitude,
       'category': category != null ? getEventCategoryString(category!) : null,
       'isCanceled': isCanceled ? isCanceled : null,
+      'externalImageUrls': externalImageUrls ?? [],
     };
   }
 }

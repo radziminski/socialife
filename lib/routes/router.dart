@@ -67,7 +67,7 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
               page: CreateEventPage,
             ),
             AutoRoute(
-              path: 'update',
+              path: 'update/:id',
               page: UpdateEventPage,
             ),
             AutoRoute(

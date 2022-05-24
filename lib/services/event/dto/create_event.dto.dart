@@ -24,6 +24,7 @@ class CreateEventDto extends BaseDto {
     this.longitude,
     this.latitude,
     this.category,
+    this.externalImageUrls = const [],
   });
 
   @override

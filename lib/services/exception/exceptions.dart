@@ -107,3 +107,12 @@ class BadRequestException extends RequestException {
               'Make sure you provided data is correct and try again',
         );
 }
+
+class RequiredException extends RequestException {
+  RequiredException(String fieldName)
+      : super(
+          code: 5,
+          title: '"$fieldName" is required',
+          icon: Icons.error_outline,
+        );
+}

@@ -1,5 +1,6 @@
 import 'package:socialife/services/api/api.utils.dart';
 import 'package:socialife/services/api/entity/base.entity.dart';
+import 'package:socialife/services/event/dto/create_event.dto.dart';
 import 'package:socialife/services/event/entity/event_like.entity.dart';
 import 'package:socialife/services/ticket/entity/ticket_type.entity.dart';
 import 'package:socialife/services/user/entity/organization_profile.entity.dart';
@@ -62,6 +63,21 @@ class Event extends BaseEntity {
       ticketTypes = parseList(json['ticketTypes'], (json) => TicketType(json));
       likes = parseList(json['likes'], (json) => EventLike(json));
     }
+  }
+
+  CreateEventDto toCreateDto() {
+    return CreateEventDto(
+      title: title,
+      description: description ?? '',
+      startDate: startDate,
+      endDate: endDate,
+      locationName: locationName,
+      locationRef: locationRef,
+      longitude: longitude,
+      latitude: latitude,
+      category: category,
+      externalImageUrls: externalImageUrls,
+    );
   }
 }
 

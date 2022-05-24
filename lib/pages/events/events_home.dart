@@ -3,7 +3,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:socialife/routes/router.gr.dart';
-import 'package:socialife/widgets/event/event_card.dart';
 import 'package:socialife/widgets/event/event_horizontal_scroll.dart';
 import 'package:socialife/widgets/guards/redirect_for_organization.dart';
 import 'package:socialife/widgets/layout/page_padding.dart';
@@ -22,7 +21,6 @@ class EventsHomePage extends StatelessWidget {
           AutoRouter.of(context).push(EventsOrganizationHomeRoute());
         },
         child: ListView(
-          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PageHeader(title: 'Events'),
             SizedBox(

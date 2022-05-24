@@ -119,8 +119,13 @@ class AppRouter extends _i7.RootStackRouter {
           routeData: routeData, child: const _i15.CreateEventPage());
     },
     UpdateEventRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<UpdateEventRouteArgs>(
+          orElse: () =>
+              UpdateEventRouteArgs(eventId: pathParams.getInt('eventId')));
       return _i7.CupertinoPageX<dynamic>(
-          routeData: routeData, child: const _i16.UpdateEventPage());
+          routeData: routeData,
+          child: _i16.UpdateEventPage(key: args.key, eventId: args.eventId));
     },
     OrganizationEventsRoute.name: (routeData) {
       return _i7.CupertinoPageX<dynamic>(
@@ -198,7 +203,7 @@ class AppRouter extends _i7.RootStackRouter {
                 _i7.RouteConfig(CreateEventRoute.name,
                     path: 'create', parent: EventsRouter.name),
                 _i7.RouteConfig(UpdateEventRoute.name,
-                    path: 'update', parent: EventsRouter.name),
+                    path: 'update/:id', parent: EventsRouter.name),
                 _i7.RouteConfig(OrganizationEventsRoute.name,
                     path: 'my-events', parent: EventsRouter.name)
               ]),
@@ -409,10 +414,27 @@ class CreateEventRoute extends _i7.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i16.UpdateEventPage]
-class UpdateEventRoute extends _i7.PageRouteInfo<void> {
-  const UpdateEventRoute() : super(UpdateEventRoute.name, path: 'update');
+class UpdateEventRoute extends _i7.PageRouteInfo<UpdateEventRouteArgs> {
+  UpdateEventRoute({_i28.Key? key, required int eventId})
+      : super(UpdateEventRoute.name,
+            path: 'update/:id',
+            args: UpdateEventRouteArgs(key: key, eventId: eventId),
+            rawPathParams: {'eventId': eventId});
 
   static const String name = 'UpdateEventRoute';
+}
+
+class UpdateEventRouteArgs {
+  const UpdateEventRouteArgs({this.key, required this.eventId});
+
+  final _i28.Key? key;
+
+  final int eventId;
+
+  @override
+  String toString() {
+    return 'UpdateEventRouteArgs{key: $key, eventId: $eventId}';
+  }
 }
 
 /// generated route for
