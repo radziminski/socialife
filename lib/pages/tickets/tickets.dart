@@ -40,7 +40,7 @@ class TicketsPage extends StatelessWidget {
                         ? PagePadding(
                             child: Expanded(
                               child: ColumnWithSpacing(
-                                spacing: 16,
+                                spacing: 24,
                                 children: model.itemsList
                                         ?.map((ticket) =>
                                             TicketCard(ticket: ticket))
