@@ -77,6 +77,10 @@ class EventsHomePage extends StatelessWidget {
                       for (final event in getLikedEvents(model.itemsList))
                         EventHorizontalCard(
                           event: event,
+                          onTap: () {
+                            AutoRouter.of(context)
+                                .push(EventRoute(eventId: event.id));
+                          },
                         ),
                     if (getLikedEvents(model.itemsList).isEmpty)
                       Opacity(

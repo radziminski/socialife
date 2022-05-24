@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:socialife/services/event/dto/create_event.dto.dart';
-import 'package:socialife/services/event/dto/update_event.dto.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
 import 'package:socialife/services/exception/exceptions.dart';
 import 'package:socialife/widgets/button/button_primary.dart';
@@ -34,6 +33,7 @@ class _EventFormState extends State<EventForm> {
   TextEditingController descriptionController = TextEditingController();
   TextEditingController locationController = TextEditingController();
   TextEditingController categoryController = TextEditingController();
+  TextEditingController coverImageController = TextEditingController();
   DateTime? startDate;
   DateTime? endDate;
 
@@ -53,6 +53,10 @@ class _EventFormState extends State<EventForm> {
           getEventCategoryString(initialValues.category ?? EventCategory.music);
       startDate = initialValues.startDate;
       endDate = initialValues.endDate;
+      coverImageController.text = initialValues.externalImageUrls != null &&
+              initialValues.externalImageUrls!.isNotEmpty
+          ? initialValues.externalImageUrls!.first
+          : '';
     }
   }
 
@@ -72,15 +76,17 @@ class _EventFormState extends State<EventForm> {
 
     widget.onSubmit(
       CreateEventDto(
-        title: titleController.value.text,
-        description: descriptionController.value.text,
-        locationName: locationController.value.text,
-        startDate: startDate!,
-        endDate: endDate,
-        category: EventCategory.music,
-        longitude: "12",
-        latitude: "11",
-      ),
+          title: titleController.value.text,
+          description: descriptionController.value.text,
+          locationName: locationController.value.text,
+          startDate: startDate!,
+          endDate: endDate,
+          category: EventCategory.music,
+          longitude: "12",
+          latitude: "11",
+          externalImageUrls: coverImageController.text.isNotEmpty
+              ? [coverImageController.text]
+              : []),
     );
   }
 
@@ -132,6 +138,11 @@ class _EventFormState extends State<EventForm> {
         controller: categoryController,
         label: 'Category',
         placeholder: 'electronic-music',
+      ),
+      TextInput(
+        controller: coverImageController,
+        label: 'Cover image',
+        placeholder: 'Eg. https://www.example.com/image.png',
       ),
       const SizedBox(),
       if (widget.isSubmitError)

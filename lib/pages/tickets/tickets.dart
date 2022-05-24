@@ -38,15 +38,13 @@ class TicketsPage extends StatelessWidget {
                   children: [
                     model.itemsList != null && model.itemsList!.isNotEmpty
                         ? PagePadding(
-                            child: Expanded(
-                              child: ColumnWithSpacing(
-                                spacing: 24,
-                                children: model.itemsList
-                                        ?.map((ticket) =>
-                                            TicketCard(ticket: ticket))
-                                        .toList() ??
-                                    [],
-                              ),
+                            child: ColumnWithSpacing(
+                              spacing: 24,
+                              children: model.itemsList
+                                      ?.map((ticket) =>
+                                          TicketCard(ticket: ticket))
+                                      .toList() ??
+                                  [],
                             ),
                           )
                         : const SizedBox(

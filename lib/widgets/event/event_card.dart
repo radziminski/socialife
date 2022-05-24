@@ -16,6 +16,14 @@ final List<String> mockImages = [
   'https://pbs.twimg.com/media/CeeLxY9XEAAqI-_.jpg:large',
   'https://www.thedjrevolution.com/wp-content/uploads/2022/01/Tomorrowland-announces-pre-registration-2022.jpg',
   'https://l-isa-immersive.com/wp-content/uploads/2018/09/Tomorrowland_1.jpg',
+  'https://bi.im-g.pl/im/50/69/19/z26644560Q,zdjecie-ilustracyjne.jpg',
+  'https://partycamp.pl/blog/wp-content/uploads/2018/03/Ultra-Festival-2018.jpg',
+  'https://media.tacdn.com/media/attractions-splice-spp-674x446/06/75/b8/da.jpg',
+  'https://upload.wikimedia.org/wikipedia/commons/3/30/8th_symphony_of_Mahler%2C_K%C3%B6lner_Philharmonie%2C_27-6-2009.JPG',
+  'https://media.wired.com/photos/6222b1ac69fa2dc07a53ccec/master/pass/Ideas_Playing%20Violin-1308853530.jpg',
+  'https://api.time.com/wp-content/uploads/2015/07/slash.jpg',
+  'https://ychef.files.bbci.co.uk/976x549/p072v7x0.jpg',
+  'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR786MeDWheQzldBE8VO1wx4mWbr2vZLa_JliUIMJaEem4QeWr4dcpnxVTQnJGKKWx2r-g&usqp=CAU',
 ];
 
 const kCardHeight = 400.0;

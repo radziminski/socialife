@@ -103,8 +103,14 @@ class _SearchPageState extends State<SearchPage> {
                         if (model.itemsList != null &&
                             model.itemsList!.isNotEmpty)
                           ...(filterEvents(model.itemsList)
-                                  ?.map((event) =>
-                                      EventHorizontalCard(event: event))
+                                  ?.map((event) => EventHorizontalCard(
+                                        event: event,
+                                        onTap: () {
+                                          AutoRouter.of(context).push(
+                                              SearchEventRoute(
+                                                  eventId: event.id));
+                                        },
+                                      ))
                                   .toList() ??
                               [])
                         else

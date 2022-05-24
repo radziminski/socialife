@@ -15,7 +15,7 @@ class ValidateTicketPage extends StatelessWidget {
     return const PageWrapper(
       child: Center(
         child: Text(
-          'ValidateTicketPage - TODO',
+          'Scanning initialization failed',
         ),
       ),
     );

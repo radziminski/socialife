@@ -12,8 +12,8 @@ import 'package:socialife/widgets/message/info_message.dart';
 import 'package:socialife/widgets/providers/event_provider.dart';
 import 'package:socialife/widgets/ticket/ticket_type_card.dart';
 
-class EventPage extends StatelessWidget {
-  const EventPage({
+class SearchEventPage extends StatelessWidget {
+  const SearchEventPage({
     Key? key,
     @PathParam() required this.eventId,
   }) : super(key: key);
@@ -32,7 +32,7 @@ class EventPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EventProvider(
-      key: Key('$eventId-EventPage'),
+      key: Key('$eventId-SearchEventPage'),
       isItemProvider: true,
       itemId: eventId,
       builder: (context, model, _) => model.items[eventId] != null

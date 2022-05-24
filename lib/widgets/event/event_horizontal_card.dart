@@ -33,9 +33,7 @@ class _EventHorizontalCardState extends State<EventHorizontalCard> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => AutoRouter.of(context).push(
-        EventRoute(eventId: widget.event.id),
-      ),
+      onTap: () => widget.onTap?.call(),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Stack(

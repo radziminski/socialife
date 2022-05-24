@@ -19,6 +19,7 @@ import 'package:socialife/pages/events/update_event.dart';
 import 'package:socialife/pages/events/update_event_tickets.dart';
 import 'package:socialife/pages/search/organization_search.dart';
 import 'package:socialife/pages/search/search.dart';
+import 'package:socialife/pages/search/search_event.dart';
 import 'package:socialife/pages/splash.dart';
 import 'package:socialife/pages/events/create_ticket_type.dart';
 import 'package:socialife/pages/tickets/payment.dart';
@@ -107,6 +108,10 @@ import 'package:socialife/pages/tickets/validate_ticket.dart';
               AutoRoute(
                 path: 'organization',
                 page: OrganizationSearchPage,
+              ),
+              AutoRoute(
+                path: 'search/event/:eventId',
+                page: SearchEventPage,
               ),
             ]),
         AutoRoute(

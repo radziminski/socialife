@@ -37,23 +37,17 @@ class TicketsScanPage extends StatelessWidget {
                 children: [
                   model.itemsList != null && model.itemsList!.isNotEmpty
                       ? PagePadding(
-                          child: Expanded(
-                            child: ColumnWithSpacing(
-                              spacing: 0,
-                              children: model.itemsList
-                                      ?.map(
-                                        (event) => EventHorizontalCard(
-                                          event: event,
-                                          onTap: () {
-                                            AutoRouter.of(context).push(
-                                                ValidateTicketRoute(
-                                                    eventId: event.id));
-                                          },
-                                        ),
-                                      )
-                                      .toList() ??
-                                  [],
-                            ),
+                          child: ColumnWithSpacing(
+                            spacing: 0,
+                            children: model.itemsList
+                                    ?.map(
+                                      (event) => EventHorizontalCard(
+                                        event: event,
+                                        onTap: () {},
+                                      ),
+                                    )
+                                    .toList() ??
+                                [],
                           ),
                         )
                       : const SizedBox(

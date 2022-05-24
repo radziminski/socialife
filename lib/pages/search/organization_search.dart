@@ -1,4 +1,6 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:socialife/routes/router.gr.dart';
 import 'package:socialife/services/event/entity/event.entity.dart';
 import 'package:socialife/widgets/event/event_horizontal_card.dart';
 import 'package:socialife/widgets/inputs/text_input.dart';
@@ -96,8 +98,14 @@ class _OrganizationSearchPageState extends State<OrganizationSearchPage> {
                       if (model.itemsList != null &&
                           model.itemsList!.isNotEmpty)
                         ...(filterEvents(model.itemsList)
-                                ?.map((event) =>
-                                    EventHorizontalCard(event: event))
+                                ?.map((event) => EventHorizontalCard(
+                                      event: event,
+                                      onTap: () {
+                                        AutoRouter.of(context).push(
+                                            SearchEventRoute(
+                                                eventId: event.id));
+                                      },
+                                    ))
                                 .toList() ??
                             [])
                       else

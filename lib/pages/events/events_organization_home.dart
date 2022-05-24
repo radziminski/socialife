@@ -73,7 +73,7 @@ class EventsOrganizationHomePage extends StatelessWidget {
               height: 4,
             ),
             SizedBox(
-              height: 200,
+              height: 280,
               child: OrganizationEventProvider(
                 key: const Key('EventsOrganizationHomePage-EventProvider'),
                 isListProvider: true,
